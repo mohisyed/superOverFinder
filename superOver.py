@@ -2,18 +2,18 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-cricketbuzz = "https://www.cricbuzz.com/"
+cricketbuzz = "https://www.cricbuzz.com/"         # online database that holds every professional cricket matched played data
 
 
-def user_input():
-    x = input("What year do u want to search for: ")
+def user_input():     
+    x = input("What year do u want to search for: ")      
     return x
 
 
 def get_links(user_input):
     cricketbuzz_input = "https://www.cricbuzz.com/cricket-scorecard-archives/" + user_input
-    r_cricketbuzz = requests.get(cricketbuzz_input)
-    soup = BeautifulSoup(r_cricketbuzz.text, "html.parser")
+    r_cricketbuzz = requests.get(cricketbuzz_input)      # requests the url of the user inputed year
+    soup = BeautifulSoup(r_cricketbuzz.text, "html.parser")         
 
     today_div = soup.findAll("div", {"class": "cb-col-84 cb-col"})
     urls = re.findall(r'"(/cricket-series/\S*)"', str(today_div))
